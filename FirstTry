@@ -1,10 +1,12 @@
 def money()
-    print "Hello, what are you buying today? "
+    puts "Hello, what are you buying today?"
+    print "> "
     item = $stdin.gets.chomp
 
-    while item != "quit"
+    while true
         puts "Thank you for purchasing \"#{item}\"!"
-        print "Would you please read the price on the tag? "
+        puts "Would you please read the price on the tag?"
+        print "> "
         total = gets.chomp.to_f
         
         puts "$#{total}? Alright, we have a sale for 10% off."
@@ -12,11 +14,12 @@ def money()
         price = total - change
 
         puts "So, your total is $#{price}, and your change is $#{change}."
-        print "Do you have another item? "
+        puts "Do you have another item?"
+        print "> "
         item = $stdin.gets.chomp
 
         if item == "quit"
-           break 
+            break
         end
     end
 end
@@ -24,102 +27,96 @@ end
 def cmds()
     puts "List of commands for cmd/powershell/terminal"
     puts """
-    \t pwd           - print working directory
-    \t hostname      - my computer's network name
-    \t mkdir         - make directory
-    \t cd            - change directory
-    \t ls            - list directory
-    \t rmdir         - remove directory
-    \t pushd         - push directory
-    \t popd          - pop directory
-    \t cp            - copy a file or directory
-    \t robocopy      - robust copy
-    \t mv            - move a file or directory
-    \t more          - page through a file
-    \t type          - print whole file
-    \t forfiles      - run a command on lots of files
-    \t dir -r        - find files
-    \t select-string - find things inside files
-    \t help          - read a manual page
-    \t helpctr       - find what man page is appropriate
-    \t echo          - print some arguments
-    \t set           - export/set a new enviroment variable
-    \t exit          - exit the shell/cmd/terminal
-    \t runas         - DANGER! become super user root DANGER!
+    pwd           - print working directory
+    hostname      - my computer's network name
+    mkdir         - make directory
+    cd            - change directory
+    ls            - list directory
+    rmdir         - remove directory
+    pushd         - push directory
+    popd          - pop directory
+    cp            - copy a file or directory
+    robocopy      - robust copy
+    mv            - move a file or directory
+    more          - page through a file
+    type          - print whole file
+    forfiles      - run a command on lots of files
+    dir -r        - find files
+    select-string - find things inside files
+    help          - read a manual page
+    helpctr       - find what man page is appropriate
+    echo          - print some arguments
+    set           - export/set a new enviroment variable
+    exit          - exit the shell/cmd/terminal
+    runas         - DANGER! become super user root DANGER!
     """
 
-    input = "What is all this, how did I get here, oh no."
-
-    while input != "quit"
+    while true
         explain = "\nNeed help? Then ask!\n"
         print explain
-        input = gets.chomp
+        input = $stdin.gets.chomp
 
         if input == "help"
             print "To exit the script, type quit.\n"
             print "Here is a list of things you can ask me:\n"
             print "> help\n> directory\n> lost\n"
-        end    
-
-        if input == "directory"
+        elsif input == "directory"
             print "A directory is a folder.\n"
             print "Folder and directory are the same thing,\n"
             print "and they're used interchangeably.\n"
-        end
-
-     if input == "lost" ; 
-         print "If you get lost and don't know where you are or how you got there.\n"
+        elsif input == "lost"
+            print "If you get lost and don't know where you are or how you got there.\n"
             print "Type \"pwd\" and press enter.\n"
             print "Then type \"cd ~\" and press enter.\n"
             print "The first command \"pwd\" shows where you are.\n"
             print "This is your path.\n"
             print "The second command \"cd ~\" takes you home.\n"
+        elsif input == "quit"
+            break
         end
     end
 end
 
 def calc()
     loop do
-        print "Give me any number. "
-        x = gets.chomp.to_f
-        print "Alright, give me one more. "
-        y = gets.chomp.to_f
-        print "Do you want to \"add\", \"subtract\", \"multiply\", \"divide\"?, or \"quit\"? "
-        z = gets.chomp
+        puts "Give me any number."
+        print "> "
+        x = $stdin.gets.chomp.to_f
+        puts "Alright, give me one more."
+        print "> "
+        y = $stdin.gets.chomp.to_f
+        puts "Do you want to \"add\", \"subtract\", \"multiply\", \"divide\"?"
+        print "> "
+        z = $stdin.gets.chomp
     
-        if z == "add"
+        if (z == "quit") || (x == "quit") || (y == "quit")
+            break
+        elsif z == "add"
             puts x + y
         elsif z == "subtract"
             puts x - y
-        end
-        if z == "multiply"
+        elsif z == "multiply"
             puts x * y
         elsif z == "divide"
             puts x / y
         end
-        if z == "quit"
-            break
-        end
     end
 end    
 
-rb = "loser"
-while rb != "awesome"
-    print "Which script would you like to run? "
+
+loop do
+    puts "Which script would you like to run?"
+    puts "money, cmds, calc, help"
+    print "> "
     input = $stdin.gets.chomp
 
     if input == "money"
         money()
     elsif input == "cmds"
         cmds()
-    end
-
-    if input == "calc"
+    elsif input == "calc"
         calc()
-    end
-
-
-    if input == "help"
+    elsif input == "help"
         puts "You may run, \"money\", \"cmds\", \"calc\"."
         puts "You can exit any time by typing \"quit\"."
     elsif input == "quit"
